@@ -1,0 +1,7 @@
+Java Launcher: C:\Users\xiyu\.jdks\corretto-21.0.4\bin\java.exe
+Arguments: '--inJar, E:\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.21.6-56.0.8\forge-1.21.6-56.0.8-injected.jar, --outJar, E:\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.21.6-56.0.8_mapped_official_1.21.6\forge-1.21.6-56.0.8_mapped_official_1.21.6.jar, --logFile, accesstransform.log, --atFile, C:\Users\xiyu\Downloads\OneKeyMiner-1.21.5Forge-reload\build\_atJar_4\parent_at.cfg'
+Classpath:
+ - E:\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\accesstransformers\8.2.1\accesstransformers-8.2.1-fatjar.jar
+Working directory: C:\Users\xiyu\Downloads\OneKeyMiner-1.21.5Forge-reload\build\_atJar_4
+Main class: net.minecraftforge.accesstransformer.TransformerProcessor
+====================================

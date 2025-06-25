@@ -1,0 +1,17 @@
+#服务器配置||Server Config
+[server]
+	#启用工具保护模式||Enable tool protection mode
+	toolProtectionEnabled = true
+	#工具耐久阈值||Tool durability threshold
+	#Range: 0.01 ~ 1000.0
+	toolDurabilityThreshold = 0.1
+	#启用饥饿度保护||Enable hunger protection
+	hungerProtectionEnabled = true
+	#饥饿度阈值||Hunger threshold
+	#Range: 0.0 ~ 20.0
+	hungerThreshold = 3.0
+	#启用经验修正||Enable experience multiplier
+	experienceMultiplierEnabled = true
+	#经验倍率调整||Experience multiplier adjustment
+	#Range: 0.1 ~ 2.0
+	experienceMultiplier = 0.8

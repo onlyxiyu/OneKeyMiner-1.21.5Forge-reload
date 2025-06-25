@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Specification-Title: onekeyminer
+Specification-Vendor: God_xiyu(Mai_xiyu)
+Specification-Version: 1
+Implementation-Title: onekeyminer
+Implementation-Version: 1.21-3.0.1
+Implementation-Vendor: God_xiyu(Mai_xiyu)
+Implementation-Timestamp: 2025-06-19T04:02:08+0800
+

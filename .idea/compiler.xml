@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="E:/.gradle/caches/modules-2/files-2.1/net.minecraftforge/eventbus-validator/7.0-beta.7/bf4a72e926a2c582929dee344941f23530c4b4f/eventbus-validator-7.0-beta.7.jar" />
+          <entry name="E:/.gradle/caches/modules-2/files-2.1/net.minecraftforge/eventbus/7.0-beta.7/7ed4d8bbc3609eeefae80c5a713a8ac6b38e7369/eventbus-7.0-beta.7.jar" />
+          <entry name="E:/.gradle/caches/modules-2/files-2.1/org.jspecify/jspecify/1.0.0/7425a601c1c7ec76645a78d22b8c6a627edee507/jspecify-1.0.0.jar" />
+        </processorPath>
+        <module name="cn.onekeyminer.onekeyminer.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="21" />
+  </component>
+</project>
