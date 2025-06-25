@@ -29,7 +29,7 @@ import java.util.TimerTask;
  * 按键绑定管理类
  * 处理连锁模式的按键绑定、状态切换和定时发送网络包
  */
-@Mod.EventBusSubscriber(modid = Onekeyminer.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Onekeyminer.MODID, value = Dist.CLIENT)
 public class KeyBindings {
     // 连锁模式按键绑定
     public static final KeyMapping CHAIN_KEY = new KeyMapping(
@@ -86,6 +86,7 @@ public class KeyBindings {
     /**
      * 处理按键输入事件
      */
+    @SubscribeEvent
     public static void onKeyInput(InputEvent.Key event) {
         if (CHAIN_KEY.consumeClick()) {
             Boolean requireKeyHold = ClientConfig.REQUIRE_KEY_HOLD.get();

@@ -31,12 +31,6 @@ public class ChainModeCapability {
     public static final Capability<IChainMode> CHAIN_MODE_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public static void init(BusGroup modEventBus) {
-        // 注册玩家克隆事件，在玩家死亡后保留链式挖掘状态
-        FMLCommonSetupEvent.getBus(modEventBus).addListener(ChainModeCapability::onPlayerClone);
-        // 注册能力附加事件
-        FMLCommonSetupEvent.getBus(modEventBus).addListener(Player.class, ChainModeCapability::attachCapabilities);
-    }
     @SubscribeEvent
     public static void register(RegisterCapabilitiesEvent event) {
         event.register(IChainMode.class);
@@ -83,6 +77,7 @@ public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> ev
     /**
      * 在玩家死亡后复制链式挖掘状态
      */
+    @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
         Player original = event.getOriginal();
         Player clone = event.getEntity();
@@ -99,7 +94,10 @@ public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> ev
     /**
      * 附加能力到玩家
      */
-    private static void attachCapabilities(AttachCapabilitiesEvent<Player> event) {
+    @SubscribeEvent
+    private static void attachCapabilities(AttachCapabilitiesEvent.Entities event) {
+        if (!(event.getObject() instanceof Player)) return;
+
         if (ClientConfig.DEBUG.get()) {
             LOGGER.debug("在玩家 {} 身上附加链式挖掘能力", event.getObject().getName().getString());
         }
@@ -114,20 +112,17 @@ public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> ev
     /**
      * 在玩家登录时同步能力状态
      */
-    @Mod.EventBusSubscriber(modid = Onekeyminer.MODID)
-    public static class PlayerLoginHandler {
-        @SubscribeEvent
-        public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-            if (event.getEntity() instanceof ServerPlayer serverPlayer) {
-                serverPlayer.getCapability(CHAIN_MODE_CAPABILITY).ifPresent(chainMode -> {
-                    if (ClientConfig.DEBUG.get()) {
-                        LOGGER.debug("在玩家 {} 登录时同步链式挖掘模式: {}", 
-                            serverPlayer.getName().getString(), chainMode.isActive());
-                    }
-                    // 发送状态包到客户端（同步状态）
-                    NetworkHandler.sendToPlayer(new ChainModePacket(chainMode.isActive()), serverPlayer);
-                });
-            }
+    @SubscribeEvent
+    public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+            serverPlayer.getCapability(CHAIN_MODE_CAPABILITY).ifPresent(chainMode -> {
+                if (ClientConfig.DEBUG.get()) {
+                    LOGGER.debug("在玩家 {} 登录时同步链式挖掘模式: {}",
+                        serverPlayer.getName().getString(), chainMode.isActive());
+                }
+                // 发送状态包到客户端（同步状态）
+                NetworkHandler.sendToPlayer(new ChainModePacket(chainMode.isActive()), serverPlayer);
+            });
         }
     }
 
