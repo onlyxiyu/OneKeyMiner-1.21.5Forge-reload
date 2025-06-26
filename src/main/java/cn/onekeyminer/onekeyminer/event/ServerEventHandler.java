@@ -21,20 +21,12 @@ public class ServerEventHandler {
     private static final String DISCORD_LINK = "https://discord.gg/BNJuU33p";
     
     /**
-     * 初始化事件监听器
-     */
-    public static void init() {
-        MinecraftForge.EVENT_BUS.register(ServerEventHandler.class);
-    }
-    
-    /**
      * 处理玩家登录事件
      * 发送欢迎消息和Discord群组信息
      */
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer) {
-            ServerPlayer player = (ServerPlayer) event.getEntity();
+        if (event.getEntity() instanceof ServerPlayer player) {
             // 获取服务器实例
             MinecraftServer server = player.getServer();
             if (server != null) {

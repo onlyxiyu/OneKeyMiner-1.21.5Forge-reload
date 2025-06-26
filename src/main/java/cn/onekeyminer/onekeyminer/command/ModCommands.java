@@ -63,9 +63,7 @@ public class ModCommands {
     
     // 查看状态命令
     private static int showStatus(CommandContext<CommandSourceStack> context) {
-        if (context.getSource().getEntity() instanceof ServerPlayer) {
-            ServerPlayer player = (ServerPlayer) context.getSource().getEntity();
-            
+        if (context.getSource().getEntity() instanceof ServerPlayer player) {
             // 显示当前玩家连锁模式状态
             boolean chainActive = !ChainModeCapability.isChainModeActive(player);
             context.getSource().sendSuccess(() -> 

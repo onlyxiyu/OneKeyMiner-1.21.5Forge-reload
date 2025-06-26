@@ -36,34 +36,27 @@ public class Onekeyminer {
         var modBusGroup = context.getModBusGroup();
 
         // 注册配置
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
-
-        // 初始化附件系统
-        ChainModeCapability.init(modBusGroup);
-        modBusGroup.register(ChainModeCapability.class);
-        // 初始化服务端事件处理器
-        ServerEventHandler.init();
+        context.registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
+        context.registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC);
+        context.registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
 
         // 注册设置事件
-        FMLCommonSetupEvent.getBus(modBusGroup).addListener(this::commonSetup);
+        FMLCommonSetupEvent.getBus(modBusGroup).addListener(Onekeyminer::commonSetup);
 
         // 注册客户端事件（只在客户端加载）
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            FMLClientSetupEvent.getBus(modBusGroup).addListener(this::clientSetup);
-            FMLClientSetupEvent.getBus(modBusGroup).addListener(KeyBindings::registerKeyMappings);
+            FMLClientSetupEvent.getBus(modBusGroup).addListener(Onekeyminer::clientSetup);
         }
 
         LOGGER.info("注册连锁挖掘、连锁互动和连锁种植功能");
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {
+    private static void commonSetup(final FMLCommonSetupEvent event) {
         LOGGER.info("注册网络处理器");
         event.enqueueWork(NetworkHandler::register);
     }
     
-    private void clientSetup(final FMLClientSetupEvent event) {
+    private static void clientSetup(final FMLClientSetupEvent event) {
         LOGGER.info("设置客户端功能");
         event.enqueueWork(() -> {
             KeyBindings.registerClientTick();
